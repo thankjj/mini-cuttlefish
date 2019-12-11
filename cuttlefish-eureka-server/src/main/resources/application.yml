@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: cuttlefish-eureka-server
+
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: false #是否将自己注册到Eureka服务中
+    fetch-registry: false
+    #Eureka客户端与Eureka服务端进行交互的地址
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
