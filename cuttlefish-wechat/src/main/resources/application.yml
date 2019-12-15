@@ -1,6 +1,8 @@
 spring:
   application:
     name: cuttlefish-wechat
+  main:
+    allow-bean-definition-overriding: true # 支持 FeignClient 的name属性 的相同名字
 
 server:
   port: 80

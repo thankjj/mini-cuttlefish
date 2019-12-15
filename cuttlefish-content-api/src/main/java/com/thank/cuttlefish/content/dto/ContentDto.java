@@ -1,17 +1,13 @@
-package com.thank.cuttlefish.content.pojo;
+package com.thank.cuttlefish.content.dto;
 
 
 import lombok.Data;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
 @Data
-@Table(name = "t_content")
-public class Content {
+public class ContentDto {
 
-  @Id
   private Integer id;
   private String content;
   private Integer categoryId;
@@ -29,6 +25,9 @@ public class Content {
   private Date updateTime;
   private String contentCoverUrl;
 
+  private String categoryName;
+  private String nickname;
+  private String avatarImgUrl;
 
 
 

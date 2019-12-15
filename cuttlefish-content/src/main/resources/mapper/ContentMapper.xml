@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.thank.cuttlefish.user.mapper.ContentMapper">
-    <!--<resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.User">
-        &lt;!&ndash;
-      WARNING - @mbg.generated
-    &ndash;&gt;
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="gender" property="gender" jdbcType="TINYINT"/>
-        <result column="birthday" property="birthday" jdbcType="DATE"/>
-        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
-        <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
-        <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
-        <result column="user_level_id" property="userLevelId" jdbcType="TINYINT"/>
-        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
-        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
-        <result column="register_ip" property="registerIp" jdbcType="VARCHAR"/>
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="wechat_open_id" property="wechatOpenId" jdbcType="VARCHAR"/>
-    </resultMap>-->
+<mapper namespace="com.thank.cuttlefish.content.mapper.ContentMapper">
+    <select id="queryListByRand" parameterType="com.thank.cuttlefish.content.dto.ContentDto" resultType="com.thank.cuttlefish.content.dto.ContentDto">
+        SELECT t.* from(
+            SELECT t1.id, t1.content, t1.title, t1.content_cover_url, t1.update_time,
+                    t2.nickname,  t2.avatar_img_url,
+                    t3.category_name
+                FROM `t_content` t1
+                LEFT JOIN `t_user` t2 ON t1.author_id = t2.id
+                LEFT JOIN `t_content_category` t3 ON t1.category_id = t3.category_id
+            WHERE t1.id >=
+                (SELECT floor(RAND() * (SELECT MAX(id) FROM `t_content`)))
+                and t1.audit_status = 2
+                <if test="categoryId != null and categoryId != ''">
+                    and t1.categoryId = #{categoryId}
+                </if>
+            ORDER BY t1.id
+            LIMIT 5
+        ) t
+        ORDER BY t.update_time DESC
+    </select>
 </mapper>
