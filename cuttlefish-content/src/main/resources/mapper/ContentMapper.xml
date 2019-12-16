@@ -12,8 +12,8 @@
             WHERE t1.id >=
                 (SELECT floor(RAND() * (SELECT MAX(id) FROM `t_content`)))
                 and t1.audit_status = 2
-                <if test="categoryId != null and categoryId != ''">
-                    and t1.categoryId = #{categoryId}
+                <if test="categoryId != null">
+                    and t1.category_id = #{categoryId,jdbcType=INTEGER}
                 </if>
             ORDER BY t1.id
             LIMIT 5
