@@ -1,0 +1,45 @@
+<cu-custom bgImage="https://image.weilanwl.com/color2.0/plugin/cjkz2329.jpg"  isBack="{{true}}">
+  <view slot="backText">返回</view>
+ <view slot="content" mode="widthFix">{{categoryName}}
+  </view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+  <!-- <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class='action'>
+      <text class='cuIcon-titles text-orange '></text> 最新文章
+    </view>
+    <view class='action'>
+      <switch class='sm' checked='{{isCard}}' bindchange='isCard'></switch>
+    </view>
+  </view> -->
+  <view class="cu-card case">
+    <view class="cu-item shadow" wx:for="{{contentList}}" wx:key>
+      <view class="image"  bindtap="toArticleDetail" data-content='{{item}}'>
+        <image src="{{item.contentCoverUrl}}" mode="widthFix"></image>
+        <view class="cu-tag bg-blue">{{item.categoryName}}</view>
+        <view class="cu-bar bg-shadeBottom">
+          <text class="text-cut">{{item.title}}</text>
+        </view>
+      </view>
+      <view class="cu-list menu-avatar">
+        <view class="cu-item">
+          <view class="cu-avatar round lg" style="background-image:url({{item.avatarImgUrl}});"></view>
+          <view class="content flex-sub">
+            <view class="text-grey">{{item.nickname}}</view>
+            <view class="text-gray text-sm flex justify-between">
+              {{item.updateTime}}
+              <view class="text-gray text-sm">
+                <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
+                <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
+                <!-- <text class="cuIcon-messagefill margin-lr-xs"></text> 30 -->
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+</scroll-view>
