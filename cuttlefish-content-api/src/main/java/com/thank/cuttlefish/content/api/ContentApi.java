@@ -15,4 +15,12 @@ public interface ContentApi extends Api<Content> {
     @PostMapping(value = "/queryListByRand")
     List<ContentDto> queryListByRand(@RequestBody ContentDto contentDto);
 
+    // 新增/更改浏览记录
+    @PostMapping(value = "/addOrUpdateViewRecord")
+    Integer addOrUpdateViewRecord(@RequestBody ContentDto contentDto);
+
+    // 新增/更改点赞记录
+    @PostMapping(value = "/addOrUpdateThumbUp")
+    Integer addOrUpdateThumbUp(@RequestBody ContentDto contentDto);
+
 }

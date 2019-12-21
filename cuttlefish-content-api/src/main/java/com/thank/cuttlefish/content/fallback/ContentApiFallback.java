@@ -16,5 +16,15 @@ public class ContentApiFallback extends ApiFallback<Content> implements ContentA
         return null;
     }
 
+    @Override
+    public Integer addOrUpdateViewRecord(ContentDto contentDto) {
+        return null;
+    }
+
+    @Override
+    public Integer addOrUpdateThumbUp(ContentDto contentDto) {
+        return null;
+    }
+
 
 }

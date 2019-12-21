@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface WechatContentService {
     List<ContentDto> queryListByRand(ContentDto contentDto);
+
+    Integer addOrUpdateViewRecord(ContentDto contentDto);
+
+    Integer addOrUpdateThumbUp(ContentDto contentDto);
 }

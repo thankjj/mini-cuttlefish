@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.thank.cuttlefish.content.mapper.ContentMapper">
-    <select id="queryListByRand" parameterType="com.thank.cuttlefish.content.dto.ContentDto" resultType="com.thank.cuttlefish.content.dto.ContentDto">
+    <resultMap id="BaseResultMap" type="com.thank.cuttlefish.content.dto.ContentDto">
+        <result column="id" property="id" />
+        <result column="author_id" property="authorId" />
+
+        <!-- 是否点赞 -->
+        <association property="thumbUpStatus" column="{contentId = id, userId = author_id}" select="getThumbUpStatus"/>
+
+        <!-- 内容点赞总数 -->
+        <association property="thumbUpCount" column="id" select="getContentThumbUpCount"/>
+
+
+        <!-- 内容浏览总数 -->
+        <association property="viewCount" column="id" select="getContentViewCount"/>
+
+        <!-- 内容评论总数 -->
+
+
+    </resultMap>
+
+    <select id="queryListByRand" parameterType="com.thank.cuttlefish.content.dto.ContentDto" resultMap="BaseResultMap">
         SELECT t.* from(
-            SELECT t1.id, t1.content, t1.title, t1.content_cover_url, t1.update_time,
+            SELECT t1.id, t1.content, t1.title, t1.content_cover_url, t1.update_time, t1.author_id,
                     t2.nickname,  t2.avatar_img_url,
                     t3.category_name
                 FROM `t_content` t1
                 LEFT JOIN `t_user` t2 ON t1.author_id = t2.id
                 LEFT JOIN `t_content_category` t3 ON t1.category_id = t3.category_id
-            WHERE t1.id >=
-                (SELECT floor(RAND() * (SELECT MAX(id) FROM `t_content`)))
-                and t1.audit_status = 2
+            WHERE 1 = 1
+--                 and t1.id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM `t_content`)))
+                and t1.audit_status = 2 and t1.valid_status = 1
                 <if test="categoryId != null">
                     and t1.category_id = #{categoryId,jdbcType=INTEGER}
                 </if>
@@ -20,4 +39,63 @@
         ) t
         ORDER BY t.update_time DESC
     </select>
+
+
+    <!-- =============================================== 内容浏览 =============================================== -->
+    <!-- 内容浏览总数 -->
+    <select id="getContentViewCount" parameterType="int" resultType="int">
+        select IFNULL(SUM(view_times), 0) viewCount from t_view_record where content_id = #{id}
+    </select>
+
+    <!-- 是否存在用户浏览记录 -->
+    <select id="isViewRecordExist" parameterType="map" resultType="int">
+        select IFNULL(SUM(view_times), 0) from t_view_record
+         where content_id = #{contentId}  and user_id = #{userId}
+    </select>
+
+    <!-- 新增浏览记录 -->
+    <insert id="addViewRecord" parameterType="map">
+        insert into t_view_record(user_id, content_id, view_times, create_time)
+            values (#{userId}, #{contentId}, 1, #{createTime})
+    </insert>
+
+    <!-- 更改浏览数据 -->
+    <update id="updateViewRecord" parameterType="map">
+        update t_view_record set view_times = view_times + 1, update_time = #{updateTime}
+            where content_id = #{contentId} and user_id = #{userId}
+    </update>
+
+
+
+    <!-- =============================================== 内容点赞 =============================================== -->
+    <!-- 内容点赞总数 -->
+    <select id="getContentThumbUpCount" parameterType="int" resultType="int">
+        select count(id) thumbUpCount from t_content_thumb_up
+         where content_id = #{id} and thumb_status = 1
+    </select>
+
+    <!-- 用户是否点赞 -->
+    <select id="getThumbUpStatus" parameterType="map" resultType="int">
+        select IFNULL(count(id), 0) thumbUpStatus from t_content_thumb_up
+         where content_id = #{contentId}  and user_id = #{userId}   and thumb_status = 1
+    </select>
+
+    <!-- 是否存在用户点赞记录 -->
+    <select id="isThumbUpExist" parameterType="map" resultType="int">
+        select count(id) from t_content_thumb_up
+         where content_id = #{contentId}  and user_id = #{userId}
+    </select>
+
+    <!-- 新增点赞记录 -->
+    <insert id="addThumbUp" parameterType="map">
+        insert into t_content_thumb_up(content_id, user_id, thumb_status, create_time)
+            values (#{contentId}, #{userId}, 1, #{createTime})
+    </insert>
+
+    <!-- 更改点赞状态 -->
+    <update id="updateThumbUp" parameterType="map">
+        update t_content_thumb_up set thumb_status = #{thumbUpStatus}, update_time = #{updateTime}
+            where content_id = #{contentId} and user_id = #{userId}
+    </update>
+
 </mapper>

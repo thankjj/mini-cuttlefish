@@ -25,10 +25,13 @@ public class ContentDto {
   private Date updateTime;
   private String contentCoverUrl;
 
-  private String categoryName;
-  private String nickname;
-  private String avatarImgUrl;
+  private String categoryName; // 分类名称
+  private String nickname; // 用户名称
+  private String avatarImgUrl; // 用户头像地址
 
+  private Integer thumbUpStatus; // 是否点赞
+  private Integer thumbUpCount; // 点赞数
+  private Integer viewCount; // 浏览数
 
 
 }

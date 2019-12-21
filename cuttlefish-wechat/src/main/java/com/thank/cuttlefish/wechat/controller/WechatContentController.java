@@ -23,4 +23,16 @@ public class WechatContentController {
         return Result.success(wechatContentService.queryListByRand(contentDto));
     }
 
+    // 新增/更改浏览记录
+    @GetMapping("/addOrUpdateViewRecord")
+    public Result<Integer> addOrUpdateViewRecord(ContentDto contentDto){
+        return Result.success(wechatContentService.addOrUpdateViewRecord(contentDto));
+    }
+
+    // 新增/更改点赞记录
+    @GetMapping("/addOrUpdateThumbUp")
+    public Result<Integer> addOrUpdateThumbUp(ContentDto contentDto){
+        return Result.success(wechatContentService.addOrUpdateThumbUp(contentDto));
+    }
+
 }

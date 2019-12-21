@@ -22,4 +22,17 @@ public class ContentController extends BaseApi<Content> implements ContentApi {
     public List<ContentDto> queryListByRand(ContentDto contentDto) {
         return contentService.queryListByRand(contentDto);
     }
+
+    // 新增/更改浏览记录
+    @Override
+    public Integer addOrUpdateViewRecord(ContentDto contentDto){
+        return contentService.addOrUpdateViewRecord(contentDto);
+    }
+
+    // 新增/更改点赞记录
+    @Override
+    public Integer addOrUpdateThumbUp(ContentDto contentDto){
+        return contentService.addOrUpdateThumbUp(contentDto);
+    }
+
 }

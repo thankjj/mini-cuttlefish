@@ -22,4 +22,14 @@ public class WechatContentServiceImpl implements WechatContentService {
         List<ContentDto> contents =  contentApi.queryListByRand(contentDto);
         return contents;
     }
+
+    @Override
+    public Integer addOrUpdateViewRecord(ContentDto contentDto) {
+        return contentApi.addOrUpdateViewRecord(contentDto);
+    }
+
+    @Override
+    public Integer addOrUpdateThumbUp(ContentDto contentDto) {
+        return contentApi.addOrUpdateThumbUp(contentDto);
+    }
 }
