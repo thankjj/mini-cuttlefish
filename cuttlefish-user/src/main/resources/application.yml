@@ -2,7 +2,7 @@ spring:
   application:
     name: cuttlefish-user
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/cuttlefish_db?serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true&tinyInt1isBit=false&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/cuttlefish_db_prod?serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true&tinyInt1isBit=false&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver

@@ -1,6 +1,7 @@
 package com.thank.cuttlefish.content.service.impl;
 
 import com.thank.cuttlefish.common.service.BaseService;
+import com.thank.cuttlefish.common.utils.WebUtil;
 import com.thank.cuttlefish.content.dto.ContentDto;
 import com.thank.cuttlefish.content.mapper.ContentMapper;
 import com.thank.cuttlefish.content.pojo.Content;
@@ -28,6 +29,9 @@ public class ContentServiceImpl extends BaseService<Content> implements ContentS
     public Integer addOrUpdateViewRecord(ContentDto contentDto) {
         Date now = new Date();
         Map<String, Object> map = new HashMap<String, Object>();
+        if ("".equals(contentDto.getAuthorId())){
+            contentDto.setAuthorId(WebUtil.getInstance().getIpAddress());
+        }
         map.put("userId", contentDto.getAuthorId());
         map.put("contentId", contentDto.getId());
 
