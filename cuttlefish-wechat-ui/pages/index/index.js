@@ -20,13 +20,18 @@ Page({
   },
 
   onLoad: function () {
-    // wx.login({
-    //   success: res => {
-    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-    //     console.log(res.code)
-    //   }
-    // })
-  }
+    
+  },
+  
+  onShow: function () {
+    var basics = this.selectComponent("#basics")
+    // console.log("详情页面关闭->重新加载页面。。。。")
+    if(basics){
+      basics.request()
+    }
+    
+  },
+
 
   //事件处理函数
   // bindViewTap: function() {

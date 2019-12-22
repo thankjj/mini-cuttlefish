@@ -15,12 +15,14 @@ Page({
       categoryName: category.categoryName,
     })
     categoryId = category.categoryId
+    // console.log(categoryId+"=========================")
     this.request(categoryId)
   },
 
 
+
   request: function (categoryId) {
-    if (!app.globalData.sortedContentList) {
+    // if (!app.globalData.sortedContentList) {
       wx.showLoading({
         title: '加载中',
         mask: true,
@@ -46,19 +48,19 @@ Page({
             wx.hideLoading();
           }
         })
-    } else {
-      console.log("is already cache the sortedContentList")
-      this.setData({
-        contentList: app.globalData.sortedContentList
-      })
-    }
+    // } else {
+    //   console.log("is already cache the sortedContentList")
+    //   this.setData({
+    //     contentList: app.globalData.sortedContentList
+    //   })
+    // }
   },
 
 
   toArticleDetail: function(event) {
     event.currentTarget.dataset.content.sorted = categoryId
     var content = JSON.stringify(event.currentTarget.dataset.content)
-    console.log(content)
+    // console.log(content)
     wx.navigateTo({
       url: '/pages/article/detail/detail?content=' + encodeURIComponent(content),
     })

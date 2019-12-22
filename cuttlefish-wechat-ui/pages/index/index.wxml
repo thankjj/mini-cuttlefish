@@ -1,4 +1,4 @@
-<basics wx:if="{{PageCur=='basics'}}"></basics>
+<basics wx:if="{{PageCur=='basics'}}" id="basics"></basics>
 <component wx:if="{{PageCur=='component'}}"></component>
 <!-- <plugin wx:if="{{PageCur=='plugin'}}"></plugin> -->
 <about wx:if="{{PageCur=='about'}}"></about>

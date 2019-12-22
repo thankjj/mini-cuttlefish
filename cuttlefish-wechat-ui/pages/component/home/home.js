@@ -9,7 +9,6 @@ Component({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    content: '1',
     contentCategoryList: [],
     list: [{
       title: '内涵段子',
@@ -54,6 +53,13 @@ Component({
     
   },
 
+  // moved: function () {
+  //   console.log("==============moved==================")
+  //  },
+  // detached: function () {
+  //   console.log("=============detached===================")
+  //  },
+
 
   methods: {
     toCategoryArticleList(event) {
@@ -63,7 +69,7 @@ Component({
         url: '/pages/component/article/article?category=' + encodeURIComponent(category),
       })
     },
-    
+
 
 
   }

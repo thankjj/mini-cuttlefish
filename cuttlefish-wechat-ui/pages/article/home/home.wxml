@@ -63,8 +63,9 @@
             <view class="text-gray text-sm flex justify-between">
               {{item.updateTime}}
               <view class="text-gray text-sm">
-                <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-                <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
+                <text class="cuIcon-attentionfill margin-lr-xs"></text> {{item.viewCount}}
+                <text class="cuIcon-appreciatefill margin-lr-xs {{item.thumbUpStatus == 0 ? '' : 'text-red'}}"></text> 
+                  <!-- 点赞数 -->{{item.thumbUpCount}}
                 <!-- <text class="cuIcon-messagefill margin-lr-xs"></text> 30 -->
               </view>
             </view>

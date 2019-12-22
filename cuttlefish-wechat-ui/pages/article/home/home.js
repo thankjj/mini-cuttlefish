@@ -37,15 +37,32 @@ Component({
   },
 
 
-  attached: function () { 
-    this.request()
+  attached: function () {
+    var authorId = ''
+    var authorId = ''
+    if (wx.getStorageSync("userInfo")) {
+      app.globalData.userinfo = wx.getStorageSync("userInfo")
+      authorId = wx.getStorageSync("userInfo").id
+    }
+    this.request(authorId)
   },
   
   methods: {
+    show: function () {
+      console.log("show........")
+    },
+
     isCard(e) {
       this.setData({
         isCard: e.detail.value
       })
+      // 刷新数据
+      app.globalData.contentList = null
+      var authorId = ''
+      if (wx.getStorageSync("userInfo")) {
+        authorId = wx.getStorageSync("userInfo").id
+      }
+      this.request(authorId)
     },
     toArticleDetail(event) {
       var content = JSON.stringify(event.currentTarget.dataset.content)
@@ -55,13 +72,13 @@ Component({
         url: '/pages/article/detail/detail?content=' + encodeURIComponent(content),
       })
     },
-    request: function () {
+    request: function (authorId) {
       if (!app.globalData.contentList) {
         wx.showLoading({
           title: '加载中',
           mask: true,
         })
-        util.request(api.ContentList, {},
+        util.request(api.ContentList, { 'authorId': authorId},
           'GET').then(res => {
             if (res.code == 200) {
               var data = res.data

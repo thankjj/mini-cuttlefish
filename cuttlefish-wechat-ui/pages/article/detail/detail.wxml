@@ -18,15 +18,18 @@
       </view>
     </view>
     <view class="text-content">
-      {{content}}
+      
+      <rich-text nodes="{{content}}"></rich-text>
     </view>
     <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">
       <view class="bg-img {{isCard?'':'only-img'}}" style="background-image:url({{contentCoverUrl}});" wx:for="{{isCard?9:1}}" wx:key="{{index}}">
       </view>
     </view>
     <view class="text-gray text-sm text-right padding">
-      <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-      <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
+      <text class="cuIcon-attentionfill margin-lr-xs"></text> {{viewCount}}
+      <text bindtap="thumbUp" data-contentid="{{contentId}}" 
+        class="cuIcon-appreciatefill margin-lr-xs {{thumbUpStatus == 0 ? '' : 'text-red'}}"></text> 
+            <!-- 点赞数 -->{{thumbUpCount}}
       <!-- <text class="cuIcon-messagefill margin-lr-xs"></text> 30 -->
     </view>
     <!-- <view class="cu-list menu-avatar comment solids-top">
