@@ -6,7 +6,7 @@
         <result column="author_id" property="authorId" />
 
         <!-- 是否点赞 -->
-        <association property="thumbUpStatus" column="{contentId = id, userId = author_id}" select="getThumbUpStatus"/>
+        <!--<association property="thumbUpStatus" column="{contentId = id, userId = author_id}" select="getThumbUpStatus"/>-->
 
         <!-- 内容点赞总数 -->
         <association property="thumbUpCount" column="id" select="getContentThumbUpCount"/>
@@ -24,12 +24,14 @@
         SELECT t.* from(
             SELECT t1.id, t1.content, t1.title, t1.content_cover_url, t1.update_time, t1.author_id,
                     t2.nickname,  t2.avatar_img_url,
-                    t3.category_name
-                FROM `t_content` t1
+                    t3.category_name,
+                    (select IFNULL(count(id), 0)  from t_content_thumb_up
+                        where content_id = t1.id  and user_id = #{authorId} and thumb_status = 1) thumbUpStatus
+        FROM `t_content` t1
                 LEFT JOIN `t_user` t2 ON t1.author_id = t2.id
                 LEFT JOIN `t_content_category` t3 ON t1.category_id = t3.category_id
             WHERE 1 = 1
---                 and t1.id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM `t_content`)))
+                and t1.id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM `t_content`)))
                 and t1.audit_status = 2 and t1.valid_status = 1
                 <if test="categoryId != null">
                     and t1.category_id = #{categoryId,jdbcType=INTEGER}

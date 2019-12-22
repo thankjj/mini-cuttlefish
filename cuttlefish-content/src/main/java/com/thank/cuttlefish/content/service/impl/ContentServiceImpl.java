@@ -46,7 +46,7 @@ public class ContentServiceImpl extends BaseService<Content> implements ContentS
             map.put("updateTime", now);
             contentMapper.updateViewRecord(map);
         }
-        return ++count;
+        return contentMapper.getContentViewCount(contentDto.getId());
 
     }
 

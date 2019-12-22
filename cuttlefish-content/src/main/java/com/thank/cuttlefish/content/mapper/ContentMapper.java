@@ -17,6 +17,8 @@ public interface ContentMapper extends MyMapper<Content> {
     Integer addViewRecord(Map<String, Object> map);
     // 更改浏览数据
     Integer updateViewRecord(Map<String, Object> map);
+    // 获取文章总浏览数
+    Integer getContentViewCount(Integer id);
 
     // ========================= 内容浏览 ===============================
     // 用户是否点赞
@@ -27,5 +29,6 @@ public interface ContentMapper extends MyMapper<Content> {
     Integer addThumbUp(Map<String, Object> map);
     // 更改浏览数据
     Integer updateThumbUp(Map<String, Object> map);
+
 
 }
