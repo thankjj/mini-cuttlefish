@@ -10,6 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 /**
  * 用户服务
  */
+
 @SpringCloudApplication
 @EnableFeignClients("com.thank.cuttlefish.*.api")
 @ComponentScan(value = "com.thank.cuttlefish")
