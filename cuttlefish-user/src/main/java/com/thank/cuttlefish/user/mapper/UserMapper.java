@@ -1,7 +1,7 @@
 package com.thank.cuttlefish.user.mapper;
 
-import com.thank.cuttlefish.common.utils.MyMapper;
-import com.thank.cuttlefish.user.po.User;
+import com.thank.cuttlefish.base.mapper.MyMapper;
+import com.thank.cuttlefish.pojo.User;
 
 public interface UserMapper extends MyMapper<User> {
 

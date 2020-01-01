@@ -31,7 +31,26 @@ feign:
               timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms
 
 #开启驼峰命名转换
-mybatis:
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#  mapper-locations: classpath:mapper/*.xml #配置mapper xml路径
+
+###################  mybatis-plus配置  ###################
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  typeAliasesPackage: com.thank.cuttlefish.pojo
+  global-config:
+    id-type: 0  # 0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
+    db-column-underline: false
+    refresh-mapper: true
   configuration:
     map-underscore-to-camel-case: true
-  mapper-locations: classpath:mapper/*.xml #配置mapper xml路径
+    cache-enabled: true #配置的缓存的全局开关
+    #    lazyLoadingEnabled: true #延时加载的开关
+    multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+
+#控制台打印SQL
+logging:
+  level:
+    com.thank.cuttlefish.content.mapper: DEBUG

@@ -1,13 +1,13 @@
 package com.thank.cuttlefish.wechat.controller;
 
 import com.thank.cuttlefish.common.utils.Result;
-import com.thank.cuttlefish.content.dto.ContentDto;
-import com.thank.cuttlefish.content.pojo.Content;
+import com.thank.cuttlefish.pojo.dto.ContentDto;
 import com.thank.cuttlefish.wechat.service.WechatContentService;
-import com.thank.cuttlefish.wechat.vo.ContentParamVO;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

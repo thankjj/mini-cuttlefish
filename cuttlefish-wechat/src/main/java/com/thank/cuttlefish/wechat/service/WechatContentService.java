@@ -1,8 +1,6 @@
 package com.thank.cuttlefish.wechat.service;
 
-import com.thank.cuttlefish.content.dto.ContentDto;
-import com.thank.cuttlefish.content.pojo.Content;
-import com.thank.cuttlefish.wechat.vo.ContentParamVO;
+import com.thank.cuttlefish.pojo.dto.ContentDto;
 
 import java.util.List;
 

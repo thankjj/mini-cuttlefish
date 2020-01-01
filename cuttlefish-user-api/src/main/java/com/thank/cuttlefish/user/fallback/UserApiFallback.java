@@ -1,8 +1,8 @@
 package com.thank.cuttlefish.user.fallback;
 
-import com.thank.cuttlefish.common.fallback.ApiFallback;
+import com.thank.cuttlefish.base.api.fallback.ApiFallback;
+import com.thank.cuttlefish.pojo.User;
 import com.thank.cuttlefish.user.api.UserApi;
-import com.thank.cuttlefish.user.po.User;
 import org.springframework.stereotype.Component;
 
 @Component

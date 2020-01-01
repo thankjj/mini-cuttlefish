@@ -1,9 +1,10 @@
 package com.thank.cuttlefish.content.service;
 
-import com.thank.cuttlefish.common.service.IService;
-import com.thank.cuttlefish.content.pojo.ContentCategory;
 
-public interface ContentCategoryService extends IService<ContentCategory> {
+import com.thank.cuttlefish.base.service.MyService;
+import com.thank.cuttlefish.pojo.ContentCategory;
+
+public interface ContentCategoryService extends MyService<ContentCategory> {
 
 
 }

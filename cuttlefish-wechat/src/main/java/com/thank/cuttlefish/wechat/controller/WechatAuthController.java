@@ -2,8 +2,8 @@ package com.thank.cuttlefish.wechat.controller;
 
 import com.thank.cuttlefish.common.utils.Result;
 import com.thank.cuttlefish.wechat.service.WechatAuthService;
-import com.thank.cuttlefish.wechat.vo.LoginAuthParamVO;
-import com.thank.cuttlefish.wechat.vo.LoginAuthResultVO;
+import com.thank.cuttlefish.pojo.vo.LoginAuthParamVO;
+import com.thank.cuttlefish.pojo.vo.LoginAuthResultVO;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

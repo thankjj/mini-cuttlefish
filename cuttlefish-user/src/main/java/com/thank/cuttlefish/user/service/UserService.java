@@ -1,10 +1,9 @@
 package com.thank.cuttlefish.user.service;
 
-import com.thank.cuttlefish.common.service.IService;
-import com.thank.cuttlefish.user.po.User;
 
-public interface UserService extends IService<User> {
-//    User userLogin(User user);
+import com.thank.cuttlefish.base.service.MyService;
+import com.thank.cuttlefish.pojo.User;
 
+public interface UserService extends MyService<User> {
 
 }

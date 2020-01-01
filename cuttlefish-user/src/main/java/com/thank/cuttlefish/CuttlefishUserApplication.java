@@ -1,20 +1,21 @@
 package com.thank.cuttlefish;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
-import tk.mybatis.spring.annotation.MapperScan;
 
 
 /**
  * 用户服务
  */
-
-@SpringCloudApplication
+@SpringBootApplication
+@EnableEurekaClient
 @EnableFeignClients("com.thank.cuttlefish.*.api")
-@ComponentScan(value = "com.thank.cuttlefish")
-@MapperScan(basePackages = "com.thank.cuttlefish.*.mapper")
+@ComponentScan(basePackages = {"com.thank.cuttlefish.base.config.properties", "com.thank.cuttlefish.user"})
+@MapperScan(basePackages = "com.thank.cuttlefish.user.mapper")
 public class CuttlefishUserApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CuttlefishUserApplication.class, args);

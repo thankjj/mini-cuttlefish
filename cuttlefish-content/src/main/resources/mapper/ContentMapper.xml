@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.thank.cuttlefish.content.mapper.ContentMapper">
-    <resultMap id="BaseResultMap" type="com.thank.cuttlefish.content.dto.ContentDto">
+    <resultMap id="BaseResultMap" type="com.thank.cuttlefish.pojo.dto.ContentDto">
         <result column="id" property="id" />
         <result column="author_id" property="authorId" />
 
@@ -20,7 +20,7 @@
 
     </resultMap>
 
-    <select id="queryListByRand" parameterType="com.thank.cuttlefish.content.dto.ContentDto" resultMap="BaseResultMap">
+    <select id="queryListByRand" parameterType="com.thank.cuttlefish.pojo.dto.ContentDto" resultMap="BaseResultMap">
         SELECT t.* from(
             SELECT t1.id, t1.content, t1.title, t1.content_cover_url, t1.update_time, t1.author_id,
                     t2.nickname,  t2.avatar_img_url,
@@ -29,7 +29,7 @@
                         where content_id = t1.id  and user_id = #{authorId} and thumb_status = 1) thumbUpStatus
         FROM `t_content` t1
                 LEFT JOIN `t_user` t2 ON t1.author_id = t2.id
-                LEFT JOIN `t_content_category` t3 ON t1.category_id = t3.category_id
+                LEFT JOIN `t_content_category` t3 ON t1.category_id = t3.id
             WHERE 1 = 1
                 and t1.id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM `t_content`)))
                 and t1.audit_status = 2 and t1.valid_status = 1

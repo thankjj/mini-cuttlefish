@@ -1,22 +1,26 @@
 package com.thank.cuttlefish.content.service.impl;
 
-import com.thank.cuttlefish.common.service.BaseService;
-import com.thank.cuttlefish.common.utils.WebUtil;
-import com.thank.cuttlefish.content.dto.ContentDto;
+import com.thank.cuttlefish.base.service.impl.MyServiceImpl;
+import com.thank.cuttlefish.base.utils.WebUtil;
 import com.thank.cuttlefish.content.mapper.ContentMapper;
-import com.thank.cuttlefish.content.pojo.Content;
 import com.thank.cuttlefish.content.service.ContentService;
+import com.thank.cuttlefish.pojo.Content;
+import com.thank.cuttlefish.pojo.dto.ContentDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//import com.thank.cuttlefish.base.utils.WebUtil;
 
-@RestController
-public class ContentServiceImpl extends BaseService<Content> implements ContentService {
+
+@Service
+@Transactional
+public class ContentServiceImpl extends MyServiceImpl<Content> implements ContentService {
     @Autowired
     private ContentMapper contentMapper;
 

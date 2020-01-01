@@ -1,13 +1,15 @@
 package com.thank.cuttlefish.content.service.impl;
 
-import com.thank.cuttlefish.common.service.BaseService;
-import com.thank.cuttlefish.content.pojo.ContentCategory;
+import com.thank.cuttlefish.base.service.impl.MyServiceImpl;
 import com.thank.cuttlefish.content.service.ContentCategoryService;
-import org.springframework.web.bind.annotation.RestController;
+import com.thank.cuttlefish.pojo.ContentCategory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
-@RestController
-public class ContentCategoryServiceImpl extends BaseService<ContentCategory> implements ContentCategoryService {
+@Service
+@Transactional
+public class ContentCategoryServiceImpl extends MyServiceImpl<ContentCategory> implements ContentCategoryService {
 
 
 

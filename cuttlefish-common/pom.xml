@@ -10,12 +10,44 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cuttlefish-common</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>cuttlefish-base</module>
+        <module>cuttlefish-base-api</module>
+        <module>cuttlefish-other</module>
+        <module>cuttlefish-pojo</module>
+    </modules>
 
-    <dependencies>
+    <!--<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.thank</groupId>
+                <artifactId>cuttlefish-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thank</groupId>
+                <artifactId>cuttlefish-base-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thank</groupId>
+                <artifactId>cuttlefish-pojo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thank</groupId>
+                <artifactId>cuttlefish-other</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>-->
+
+   <!-- <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <!-- 依赖不传递过去 -->
+            &lt;!&ndash; 依赖不传递过去 &ndash;&gt;
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -23,11 +55,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--<dependency>
+        &lt;!&ndash;<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <optional>true</optional>
-        </dependency>-->
+        </dependency>&ndash;&gt;
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
@@ -38,6 +70,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+            <version>2.1.8</version>
+        </dependency>
+    </dependencies>-->
 
 </project>

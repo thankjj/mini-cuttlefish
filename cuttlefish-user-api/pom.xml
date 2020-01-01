@@ -14,15 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>com.thank</groupId>
-            <artifactId>cuttlefish-common</artifactId>
+            <artifactId>cuttlefish-base-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <dependency>
+
+        <!--<dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
         </dependency>
@@ -30,7 +27,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 

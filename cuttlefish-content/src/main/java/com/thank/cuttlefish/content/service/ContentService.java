@@ -1,13 +1,12 @@
 package com.thank.cuttlefish.content.service;
 
-import com.thank.cuttlefish.common.service.IService;
-import com.thank.cuttlefish.content.dto.ContentDto;
-import com.thank.cuttlefish.content.pojo.Content;
+import com.thank.cuttlefish.base.service.MyService;
+import com.thank.cuttlefish.pojo.Content;
+import com.thank.cuttlefish.pojo.dto.ContentDto;
 
 import java.util.List;
-import java.util.Map;
 
-public interface ContentService extends IService<Content> {
+public interface ContentService extends MyService<Content> {
     List<ContentDto> queryListByRand(ContentDto contentDto);
 
     // 新增/更改浏览记录
