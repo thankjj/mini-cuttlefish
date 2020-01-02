@@ -16,6 +16,8 @@
         <module>cuttlefish-content</module>
         <module>cuttlefish-content-api</module>
         <module>cuttlefish-wechat-ui</module>
+        <module>cuttlefish-admin</module>
+        <module>cuttlefish-admin-ui</module>
     </modules>
     <packaging>pom</packaging>
 
