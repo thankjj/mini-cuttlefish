@@ -15,19 +15,20 @@ Component({
     swiperList: [{
       id: 0,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+      url: 'http://img0.imgtn.bdimg.com/it/u=206167388,1033707220&fm=26&gp=0.jpg'
+      
     }, {
       id: 1,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+      url: 'http://n.sinaimg.cn/sinacn10/143/w585h358/20180809/e75f-hhnunsp8365021.png',
     }, {
       id: 2,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+      url: 'http://uploads.xuexila.com/allimg/1709/1109-1F913124317-50.jpg'  
     }, {
       id: 3,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
+      url: 'http://img4.imgtn.bdimg.com/it/u=3526979462,466258274&fm=26&gp=0.jpg'
     },
     ],
 

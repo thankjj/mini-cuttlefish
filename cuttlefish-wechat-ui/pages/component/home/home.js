@@ -36,7 +36,7 @@ Component({
 
   attached: function () {
     if (!app.globalData.contentCategoryList){
-      util.request(api.ContentCategoryList, null, 'POST').then(res => {
+      util.request(api.ContentCategoryList, null, 'GET').then(res => {
         if (res.code == 200) {
           app.globalData.contentCategoryList = res.data
           this.setData({

@@ -116,7 +116,7 @@ Page({
 
   // 触摸开始事件 
   touchStart: function (e) {
-    clearTimeout(addOrUpdateViewRecordDelay)
+    
     touchDot = e.touches[0].pageX; // 获取触摸时的原点 
     // 使用js计时器记录时间  
     interval = setInterval(function () {
@@ -128,6 +128,7 @@ Page({
     var touchMove = e.touches[0].pageX;
     // 向左滑动  
     if (touchMove - touchDot < -40 && time < 10 && flag) {
+      clearTimeout(addOrUpdateViewRecordDelay)
       flag = false
       if (app.globalData.contentSwipeList.length == 1) {
         this.request(util.isEmpty(currentContent.sorted) ? "" : currentContent.sorted)
@@ -182,9 +183,9 @@ Page({
           for (var item in data) {
             data[item].updateTime = util.formatTime(data[item].updateTime).replace(/-/g, '/')
             data[item].avatarImgUrl = util.isEmpty(data[item].avatarImgUrl) ?
-              api.Constant_user_default_imag : data[item].avatarImgUrl
+              api.Constant_user_default_imag_base64 : data[item].avatarImgUrl
             data[item].contentCoverUrl = util.isEmpty(data[item].contentCoverUrl) ?
-              api.Constant_content_cover_default_imag : data[item].contentCoverUrl
+              api.Constant_content_cover_default_imag_base64 : data[item].contentCoverUrl
             data[item].nickname = util.isEmpty(data[item].nickname) ? api.Constant_user_default_nickname : data[item].nickname
             data[item].categoryName = util.isEmpty(data[item].categoryName) ?
               api.Constant_content__default_category : data[item].categoryName

@@ -14,7 +14,7 @@ Page({
     this.setData({
       categoryName: category.categoryName,
     })
-    categoryId = category.categoryId
+    categoryId = category.id
     // console.log(categoryId+"=========================")
     this.request(categoryId)
   },

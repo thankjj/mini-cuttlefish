@@ -16,6 +16,7 @@
     </view>
     <view class='action'>
       <switch class='sm' checked='{{isCard}}' bindchange='isCard'></switch>
+      <!-- <text class="cuIcon-refresh lg text-gray"></text> -->
     </view>
   </view>
   <view class="cu-card case no-card">
