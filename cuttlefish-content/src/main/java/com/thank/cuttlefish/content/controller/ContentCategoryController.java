@@ -1,6 +1,6 @@
 package com.thank.cuttlefish.content.controller;
 
-import com.thank.cuttlefish.base.BaseApi;
+import com.thank.cuttlefish.base.api.BaseApi;
 import com.thank.cuttlefish.content.api.ContentCategoryApi;
 import com.thank.cuttlefish.content.service.ContentService;
 import com.thank.cuttlefish.pojo.ContentCategory;

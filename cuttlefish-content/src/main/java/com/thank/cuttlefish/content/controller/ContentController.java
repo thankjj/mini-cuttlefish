@@ -1,13 +1,12 @@
 package com.thank.cuttlefish.content.controller;
 
-import com.thank.cuttlefish.base.BaseApi;
+import com.thank.cuttlefish.base.api.BaseApi;
 import com.thank.cuttlefish.common.utils.Result;
 import com.thank.cuttlefish.content.api.ContentApi;
 import com.thank.cuttlefish.content.service.ContentService;
 import com.thank.cuttlefish.pojo.Content;
 import com.thank.cuttlefish.pojo.dto.ContentDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
