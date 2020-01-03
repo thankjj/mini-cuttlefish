@@ -1,16 +1,26 @@
 spring:
   application:
-    name: cuttlefish-user
+    name: cuttlefish-content
+
+  # 数据库配置
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/cuttlefish_db_prod?serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true&tinyInt1isBit=false&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      initial-size: 5 #初始化提供的连接数
+      min-idle: 5 #数据库连接池的最小维持连接数
+      max-total: 5  #最大的连接数
+      max-wait-millis: 200  #等待连接获取的最大超时时间
+
+  # 支持 FeignClient 的name属性 的相同名字
   main:
-    allow-bean-definition-overriding: true # 支持 FeignClient 的name属性 的相同名字
+    allow-bean-definition-overriding: true
 
 server:
-  port: 9000
+  port: 9001
 
 eureka:
   client:
@@ -30,11 +40,6 @@ feign:
             thread:
               timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms
 
-#开启驼峰命名转换
-#mybatis:
-#  configuration:
-#    map-underscore-to-camel-case: true
-#  mapper-locations: classpath:mapper/*.xml #配置mapper xml路径
 
 ###################  mybatis-plus配置  ###################
 mybatis-plus:
@@ -50,7 +55,9 @@ mybatis-plus:
     #    lazyLoadingEnabled: true #延时加载的开关
     multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
 
+
 #控制台打印SQL
 logging:
   level:
     com.thank.cuttlefish.content.mapper: DEBUG
+
