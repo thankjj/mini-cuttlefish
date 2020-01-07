@@ -10,7 +10,7 @@ public class ContentDto {
   private Integer id;
   private String content;
   private Integer categoryId;
-  private String authorId;
+  private Integer authorId;
   private String title;
   private Integer contentType;
   private Integer auditStatus;

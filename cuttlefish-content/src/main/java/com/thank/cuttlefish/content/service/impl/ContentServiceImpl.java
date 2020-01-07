@@ -1,7 +1,9 @@
 package com.thank.cuttlefish.content.service.impl;
 
+import com.thank.cuttlefish.base.config.RedisUtil;
 import com.thank.cuttlefish.base.service.impl.MyServiceImpl;
 import com.thank.cuttlefish.base.utils.WebUtil;
+import com.thank.cuttlefish.common.constant.CuttlefishConstant;
 import com.thank.cuttlefish.content.mapper.ContentMapper;
 import com.thank.cuttlefish.content.service.ContentService;
 import com.thank.cuttlefish.pojo.Content;
@@ -24,6 +26,9 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
     @Autowired
     private ContentMapper contentMapper;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     @Override
     public List<ContentDto> queryListByRand(ContentDto contentDto) {
         return contentMapper.queryListByRand(contentDto);
@@ -33,9 +38,9 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
     public Integer addOrUpdateViewRecord(ContentDto contentDto) {
         Date now = new Date();
         Map<String, Object> map = new HashMap<String, Object>();
-        if ("".equals(contentDto.getAuthorId())){
-            contentDto.setAuthorId(WebUtil.getInstance().getIpAddress());
-        }
+//        if ("".equals(contentDto.getAuthorId())){
+//            contentDto.setAuthorId(WebUtil.getInstance().getIpAddress());
+//        }
         map.put("userId", contentDto.getAuthorId());
         map.put("contentId", contentDto.getId());
 
@@ -56,24 +61,39 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
 
     @Override
     public Integer addOrUpdateThumbUp(ContentDto contentDto) {
-        Date now = new Date();
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("userId", contentDto.getAuthorId());
-        map.put("contentId", contentDto.getId());
-
-        // 是否存在用户点赞记录
-        Integer count = contentMapper.isThumbUpExist(map);
-        map.put("thumbUpStatus", contentDto.getThumbUpStatus());
-        if (count == 0){
-            // 新增
-            map.put("createTime", now);
-            contentMapper.addThumbUp(map);
-        }else {
-            // 修改
-            map.put("updateTime", now);
-            contentMapper.updateThumbUp(map);
+        Integer thumbStatus = contentDto.getThumbUpStatus();
+        String cacheKeyPrefix = thumbStatus == 0 ? CuttlefishConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishConstant.REDIS_KEY_USER_THUMBUP_PREFIX;
+        String cacheCurrentKey = cacheKeyPrefix + contentDto.getId();
+        String cacheOppositeKey = (thumbStatus == 1 ? CuttlefishConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishConstant.REDIS_KEY_USER_THUMBUP_PREFIX) + contentDto.getId();
+        String cacheValue = String.valueOf(contentDto.getAuthorId());
+        // 判断当前缓存中是否有此记录
+        if (!redisUtil.sIsMember(cacheCurrentKey, cacheValue)){
+            redisUtil.sAdd(cacheCurrentKey, cacheValue);
         }
-        return contentDto.getThumbUpStatus();
+        // 判断对立缓存中是否有此记录
+        if (redisUtil.sIsMember(cacheOppositeKey, cacheValue)){
+            redisUtil.delete(cacheOppositeKey);
+        }
+        return thumbStatus;
+
+//        Date now = new Date();
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("userId", contentDto.getAuthorId());
+//        map.put("contentId", contentDto.getId());
+
+//        // 是否存在用户点赞记录
+//        Integer count = contentMapper.isThumbUpExist(map);
+//        map.put("thumbUpStatus", contentDto.getThumbUpStatus());
+//        if (count == 0){
+//            // 新增
+//            map.put("createTime", now);
+//            contentMapper.addThumbUp(map);
+//        }else {
+//            // 修改
+//            map.put("updateTime", now);
+//            contentMapper.updateThumbUp(map);
+//        }
+//        return contentDto.getThumbUpStatus();
     }
 
 
