@@ -19,7 +19,7 @@ public class WechatContentCategoryController {
     @Autowired
     private WechatContentCategoryService wechatContentCategoryService;
 
-    @GetMapping("/queryList")
+    @GetMapping("/queryContentCategoryValidList")
     public Result<List<ContentCategory>> queryList() throws WxErrorException {
         return Result.success(wechatContentCategoryService.queryList());
     }

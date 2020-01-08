@@ -1,10 +1,10 @@
 package com.thank.cuttlefish.content.task;
 
-import com.thank.cuttlefish.base.config.RedisUtil;
 import com.thank.cuttlefish.common.constant.CuttlefishConstant;
 import com.thank.cuttlefish.content.mapper.ContentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,7 @@ public class ContentScheduledTask {
     private ContentMapper contentMapper;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisTemplate redisTemplate;
 
     // 点赞持久化
     @Scheduled(cron = "每隔x秒执行一次：*/59 */1 * * * ? ")
@@ -44,13 +44,13 @@ public class ContentScheduledTask {
     private void contentThumbUpPersist(){
         Map<String, Object> cacheMap = new HashMap<>();
         String thumbUpPrefix = CuttlefishConstant.REDIS_KEY_USER_THUMBUP_PREFIX + "*";
-        Set<String> cacheThumbUpData = redisUtil.keys(thumbUpPrefix);
+        Set<String> cacheThumbUpData = redisTemplate.keys(thumbUpPrefix);
         if (cacheThumbUpData.size() == 0) {
             return;
         }
         for (String key: cacheThumbUpData){
             Date now = new Date();
-            Set<String> values = redisUtil.setMembers(key);
+            Set<String> values = redisTemplate.opsForSet().members(key);
             cacheMap.put("contentId", Integer.parseInt(key.replace(CuttlefishConstant.REDIS_KEY_USER_THUMBUP_PREFIX, "")));
             for (String userId: values){
                 cacheMap.put("userId", Integer.parseInt(userId));
@@ -66,7 +66,7 @@ public class ContentScheduledTask {
                     contentMapper.updateThumbUp(cacheMap);
                 }
             }
-            redisUtil.delete(key);
+            redisTemplate.delete(key);
         }
     }
 
@@ -75,13 +75,13 @@ public class ContentScheduledTask {
     private void contentThumbUpCancelPersist(){
         Map<String, Object> cacheMap = new HashMap<>();
         String thumbUpPrefix = CuttlefishConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX + "*";
-        Set<String> cacheThumbUpCancelData = redisUtil.keys(thumbUpPrefix);
+        Set<String> cacheThumbUpCancelData = redisTemplate.keys(thumbUpPrefix);
         if (cacheThumbUpCancelData.size() == 0) {
             return;
         }
         for (String key: cacheThumbUpCancelData){
             Date now = new Date();
-            Set<String> values = redisUtil.setMembers(key);
+            Set<String> values = redisTemplate.opsForSet().members(key);
             cacheMap.put("contentId", Integer.parseInt(key.replace(CuttlefishConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX, "")));
             for (String userId: values){
                 cacheMap.put("userId", Integer.parseInt(userId));
@@ -90,7 +90,7 @@ public class ContentScheduledTask {
                 cacheMap.put("thumbUpStatus", 0);
                 contentMapper.updateThumbUp(cacheMap);
             }
-            redisUtil.delete(key);
+            redisTemplate.delete(key);
         }
     }
 

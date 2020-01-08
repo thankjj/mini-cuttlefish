@@ -17,12 +17,12 @@ public class WechatContentCategoryServiceImpl implements WechatContentCategorySe
 
     @Override
     public List<ContentCategory> queryList() {
-        WrapperDto<ContentCategory> wrapperDto = new WrapperDto<>();
-        wrapperDto.addWhereCondition("category_status", 1);
-        wrapperDto.addOrderByCondition("priority", false);
-
-        List<ContentCategory> contentCategories = contentCategoryApi.selectList(wrapperDto).getData();
-
+//        WrapperDto<ContentCategory> wrapperDto = new WrapperDto<>();
+//        wrapperDto.addWhereCondition("category_status", 1);
+//        wrapperDto.addOrderByCondition("priority", false);
+//
+//        List<ContentCategory> contentCategories = contentCategoryApi.selectList(wrapperDto).getData();
+        List<ContentCategory> contentCategories = contentCategoryApi.queryContentCategoryValidList().getData();
         return contentCategories;
     }
 

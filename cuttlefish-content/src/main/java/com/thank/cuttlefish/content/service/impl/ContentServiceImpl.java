@@ -1,14 +1,13 @@
 package com.thank.cuttlefish.content.service.impl;
 
-import com.thank.cuttlefish.base.config.RedisUtil;
 import com.thank.cuttlefish.base.service.impl.MyServiceImpl;
-import com.thank.cuttlefish.base.utils.WebUtil;
 import com.thank.cuttlefish.common.constant.CuttlefishConstant;
 import com.thank.cuttlefish.content.mapper.ContentMapper;
 import com.thank.cuttlefish.content.service.ContentService;
 import com.thank.cuttlefish.pojo.Content;
 import com.thank.cuttlefish.pojo.dto.ContentDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +26,7 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
     private ContentMapper contentMapper;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisTemplate redisTemplate;
 
     @Override
     public List<ContentDto> queryListByRand(ContentDto contentDto) {
@@ -67,12 +66,12 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
         String cacheOppositeKey = (thumbStatus == 1 ? CuttlefishConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishConstant.REDIS_KEY_USER_THUMBUP_PREFIX) + contentDto.getId();
         String cacheValue = String.valueOf(contentDto.getAuthorId());
         // 判断当前缓存中是否有此记录
-        if (!redisUtil.sIsMember(cacheCurrentKey, cacheValue)){
-            redisUtil.sAdd(cacheCurrentKey, cacheValue);
+        if (!redisTemplate.opsForSet().isMember(cacheCurrentKey, cacheValue)){
+            redisTemplate.opsForSet().add(cacheCurrentKey, cacheValue);
         }
         // 判断对立缓存中是否有此记录
-        if (redisUtil.sIsMember(cacheOppositeKey, cacheValue)){
-            redisUtil.delete(cacheOppositeKey);
+        if (redisTemplate.opsForSet().isMember(cacheOppositeKey, cacheValue)){
+            redisTemplate.delete(cacheOppositeKey);
         }
         return thumbStatus;
 

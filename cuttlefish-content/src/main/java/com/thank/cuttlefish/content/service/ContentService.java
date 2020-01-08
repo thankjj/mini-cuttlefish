@@ -5,6 +5,7 @@ import com.thank.cuttlefish.pojo.Content;
 import com.thank.cuttlefish.pojo.dto.ContentDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ContentService extends MyService<Content> {
     List<ContentDto> queryListByRand(ContentDto contentDto);
@@ -14,6 +15,5 @@ public interface ContentService extends MyService<Content> {
 
     // 新增/更改点赞记录
     Integer addOrUpdateThumbUp(ContentDto contentDto);
-
 
 }
