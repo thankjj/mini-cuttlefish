@@ -1,4 +1,4 @@
-package com.thank.cuttlefish.pojo.dto;
+package com.thank.cuttlefish.dto;
 
 import lombok.Data;
 

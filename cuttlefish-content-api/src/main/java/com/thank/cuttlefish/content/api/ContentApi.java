@@ -4,7 +4,7 @@ import com.thank.cuttlefish.base.api.Api;
 import com.thank.cuttlefish.common.utils.Result;
 import com.thank.cuttlefish.content.fallback.ContentApiFallback;
 import com.thank.cuttlefish.pojo.Content;
-import com.thank.cuttlefish.pojo.dto.ContentDto;
+import com.thank.cuttlefish.dto.ContentDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

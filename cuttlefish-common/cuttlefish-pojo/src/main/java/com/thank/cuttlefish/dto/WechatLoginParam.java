@@ -1,7 +1,9 @@
-package com.thank.cuttlefish.pojo.vo;
+package com.thank.cuttlefish.dto;
 
 
-public class LoginAuthParamVO {
+public class WechatLoginParam {
+
+    private String token; // 请求token
 
     /**
      * code : 001T94ry0Holqe1KEiry0EA2ry0T94rd
@@ -26,6 +28,14 @@ public class LoginAuthParamVO {
 
     public void setUserInfo(UserInfoX userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public static class UserInfoX {
@@ -92,6 +102,8 @@ public class LoginAuthParamVO {
         public void setUserInfo(UserInfo userInfo) {
             this.userInfo = userInfo;
         }
+
+
 
         public static class UserInfo {
             /**

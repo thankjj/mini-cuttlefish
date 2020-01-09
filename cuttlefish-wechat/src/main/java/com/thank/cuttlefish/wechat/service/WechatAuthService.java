@@ -1,7 +1,7 @@
 package com.thank.cuttlefish.wechat.service;
 
-import com.thank.cuttlefish.pojo.vo.LoginAuthParamVO;
-import com.thank.cuttlefish.pojo.vo.LoginAuthResultVO;
+import com.thank.cuttlefish.dto.UserDto;
+import com.thank.cuttlefish.dto.WechatLoginParam;
 import me.chanjar.weixin.common.error.WxErrorException;
 
 public interface WechatAuthService {
@@ -11,5 +11,5 @@ public interface WechatAuthService {
      * @param loginAuthParamVO
      * @return
      */
-    LoginAuthResultVO login(LoginAuthParamVO loginAuthParamVO) throws WxErrorException;
+    UserDto login(WechatLoginParam loginAuthParamVO) throws WxErrorException;
 }

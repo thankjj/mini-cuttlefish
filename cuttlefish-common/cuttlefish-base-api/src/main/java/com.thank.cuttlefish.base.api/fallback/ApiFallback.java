@@ -3,7 +3,7 @@ package com.thank.cuttlefish.base.api.fallback;
 import com.thank.cuttlefish.base.api.Api;
 import com.thank.cuttlefish.common.enums.CommonResultStatus;
 import com.thank.cuttlefish.common.utils.Result;
-import com.thank.cuttlefish.pojo.dto.WrapperDto;
+import com.thank.cuttlefish.dto.WrapperDto;
 
 import java.util.List;
 import java.util.Map;

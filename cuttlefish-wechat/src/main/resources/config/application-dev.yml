@@ -16,16 +16,3 @@ feign:
   hystrix:
     enabled: true
 
-wx:
-  miniapp:
-    configs[0]:
-      appid: wx3e820eb950ca1004
-      secret: d0e6bbdc272507ea7f8617aaf46b56eb
-      token: wetech.tech
-      aesKey: NDOLmGgEXiRzAioMwdGQIMZv29Pvh1PiKUEewc0r4is
-      msgDataFormat: JSON
-
-cuttlefish:
-  wx:
-    miniapp:
-      appid: wx3e820eb950ca1004

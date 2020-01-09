@@ -1,4 +1,4 @@
-package com.thank.cuttlefish.wechat.config;
+package com.thank.cuttlefish.user.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

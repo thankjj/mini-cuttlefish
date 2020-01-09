@@ -2,7 +2,6 @@ package com.thank.cuttlefish.wechat.service.impl;
 
 import com.thank.cuttlefish.content.api.ContentCategoryApi;
 import com.thank.cuttlefish.pojo.ContentCategory;
-import com.thank.cuttlefish.pojo.dto.WrapperDto;
 import com.thank.cuttlefish.wechat.service.WechatContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,7 +5,7 @@ import com.thank.cuttlefish.common.utils.Result;
 import com.thank.cuttlefish.content.api.ContentApi;
 import com.thank.cuttlefish.content.service.ContentService;
 import com.thank.cuttlefish.pojo.Content;
-import com.thank.cuttlefish.pojo.dto.ContentDto;
+import com.thank.cuttlefish.dto.ContentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,7 +1,7 @@
 package com.thank.cuttlefish.base.api;
 
 import com.thank.cuttlefish.common.utils.Result;
-import com.thank.cuttlefish.pojo.dto.WrapperDto;
+import com.thank.cuttlefish.dto.WrapperDto;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 

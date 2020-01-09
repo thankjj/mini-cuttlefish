@@ -4,7 +4,7 @@ import com.thank.cuttlefish.base.api.fallback.ApiFallback;
 import com.thank.cuttlefish.common.utils.Result;
 import com.thank.cuttlefish.content.api.ContentApi;
 import com.thank.cuttlefish.pojo.Content;
-import com.thank.cuttlefish.pojo.dto.ContentDto;
+import com.thank.cuttlefish.dto.ContentDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

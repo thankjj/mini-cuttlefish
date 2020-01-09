@@ -3,7 +3,7 @@ package com.thank.cuttlefish.base.api;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.thank.cuttlefish.base.mapper.MyMapper;
 import com.thank.cuttlefish.common.utils.Result;
-import com.thank.cuttlefish.pojo.dto.WrapperDto;
+import com.thank.cuttlefish.dto.WrapperDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

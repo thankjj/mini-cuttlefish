@@ -2,10 +2,9 @@ package com.thank.cuttlefish.content.service;
 
 import com.thank.cuttlefish.base.service.MyService;
 import com.thank.cuttlefish.pojo.Content;
-import com.thank.cuttlefish.pojo.dto.ContentDto;
+import com.thank.cuttlefish.dto.ContentDto;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ContentService extends MyService<Content> {
     List<ContentDto> queryListByRand(ContentDto contentDto);

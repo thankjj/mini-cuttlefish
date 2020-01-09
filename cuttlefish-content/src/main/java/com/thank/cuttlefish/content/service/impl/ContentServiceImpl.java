@@ -1,11 +1,11 @@
 package com.thank.cuttlefish.content.service.impl;
 
 import com.thank.cuttlefish.base.service.impl.MyServiceImpl;
-import com.thank.cuttlefish.common.constant.CuttlefishConstant;
+import com.thank.cuttlefish.common.constant.CuttlefishRedisKeyConstant;
 import com.thank.cuttlefish.content.mapper.ContentMapper;
 import com.thank.cuttlefish.content.service.ContentService;
 import com.thank.cuttlefish.pojo.Content;
-import com.thank.cuttlefish.pojo.dto.ContentDto;
+import com.thank.cuttlefish.dto.ContentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -61,9 +61,9 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
     @Override
     public Integer addOrUpdateThumbUp(ContentDto contentDto) {
         Integer thumbStatus = contentDto.getThumbUpStatus();
-        String cacheKeyPrefix = thumbStatus == 0 ? CuttlefishConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishConstant.REDIS_KEY_USER_THUMBUP_PREFIX;
+        String cacheKeyPrefix = thumbStatus == 0 ? CuttlefishRedisKeyConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishRedisKeyConstant.REDIS_KEY_USER_THUMBUP_PREFIX;
         String cacheCurrentKey = cacheKeyPrefix + contentDto.getId();
-        String cacheOppositeKey = (thumbStatus == 1 ? CuttlefishConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishConstant.REDIS_KEY_USER_THUMBUP_PREFIX) + contentDto.getId();
+        String cacheOppositeKey = (thumbStatus == 1 ? CuttlefishRedisKeyConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishRedisKeyConstant.REDIS_KEY_USER_THUMBUP_PREFIX) + contentDto.getId();
         String cacheValue = String.valueOf(contentDto.getAuthorId());
         // 判断当前缓存中是否有此记录
         if (!redisTemplate.opsForSet().isMember(cacheCurrentKey, cacheValue)){

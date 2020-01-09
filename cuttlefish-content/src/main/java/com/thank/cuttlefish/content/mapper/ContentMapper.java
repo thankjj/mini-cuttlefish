@@ -2,7 +2,7 @@ package com.thank.cuttlefish.content.mapper;
 
 import com.thank.cuttlefish.base.mapper.MyMapper;
 import com.thank.cuttlefish.pojo.Content;
-import com.thank.cuttlefish.pojo.dto.ContentDto;
+import com.thank.cuttlefish.dto.ContentDto;
 
 import java.util.List;
 import java.util.Map;

@@ -1,10 +1,10 @@
-package com.thank.cuttlefish.wechat.utils;
+package com.thank.cuttlefish.user.utils;
 
 
+import com.thank.cuttlefish.common.constant.WechatConstants;
+import com.thank.cuttlefish.common.enums.CuttlefishWechatResultStatus;
 import com.thank.cuttlefish.common.exception.CuttlefishException;
 import com.thank.cuttlefish.pojo.User;
-import com.thank.cuttlefish.wechat.constants.WechatConstants;
-import com.thank.cuttlefish.wechat.enums.CuttlefishWechatResultStatus;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;

@@ -1,6 +1,5 @@
-package com.thank.cuttlefish.wechat.utils;
+package com.thank.cuttlefish.user.utils;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -18,7 +17,7 @@ public class JsonUtils {
         JSON.setSerializationInclusion(Include.NON_NULL);
         JSON.configure(SerializationFeature.INDENT_OUTPUT, Boolean.TRUE);
         //不显示为null的字段
-        JSON.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        JSON.setSerializationInclusion(Include.NON_NULL);
         //序列化枚举是以ordinal()来输出
         JSON.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
         SimpleModule simpleModule = new SimpleModule();

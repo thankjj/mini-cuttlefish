@@ -1,7 +1,7 @@
 package com.thank.cuttlefish.wechat.controller;
 
 import com.thank.cuttlefish.common.utils.Result;
-import com.thank.cuttlefish.pojo.dto.ContentDto;
+import com.thank.cuttlefish.dto.ContentDto;
 import com.thank.cuttlefish.wechat.service.WechatContentService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.thank.cuttlefish.wechat.config;
+package com.thank.cuttlefish.user.config;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;

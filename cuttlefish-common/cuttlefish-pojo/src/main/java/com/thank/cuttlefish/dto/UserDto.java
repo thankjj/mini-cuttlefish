@@ -1,12 +1,16 @@
-package com.thank.cuttlefish.pojo;
+package com.thank.cuttlefish.dto;
 
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.thank.cuttlefish.pojo.base.BaseEntity;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.Date;
+
 @Data
-@TableName("t_user")
-public class User extends BaseEntity {
+public class UserDto implements Serializable {
+  protected Integer id;
+
+  protected Date createTime;
+  protected Date updateTime;
   private String password;
   private String qqId;
   private String wechatId;
@@ -24,6 +28,9 @@ public class User extends BaseEntity {
   private String signature;
   private Integer clientType;
   private String token;
+
+  private Integer thumbUpCount; // 点赞数
+  private Integer viewCount; // 浏览数
 
 
 }
