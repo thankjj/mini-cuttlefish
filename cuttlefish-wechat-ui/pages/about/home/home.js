@@ -38,16 +38,16 @@ Component({
         }, 'POST').then(res => {
           if (res.code == 200) {
             //存储用户信息
-            wx.setStorageSync('userInfo', res.data.userInfo);
-            wx.setStorageSync('token', res.data.token);
+            wx.setStorageSync('userInfo', res.data);
+            // wx.setStorageSync('token', res.data.token);
             //返回上一页面
             // wx.redirectTo({
             //   url: backUrl + '?' + backParams,
             // })
-            console.log(res.data.userInfo.nickname)
+            console.log(res.data.nickname)
             app.globalData.userInfo = res.data.userInfo
             this.setData({
-              userInfo: res.data.userInfo,
+              userInfo: res.data,
               hasUserInfo: true
             })
           }

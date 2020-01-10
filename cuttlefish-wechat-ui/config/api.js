@@ -1,11 +1,11 @@
 // const BaseUrl = 'http://192.168.1.105:80/wechat/'; // GB
-const BaseUrl = 'http://192.168.201.8/wechat/'; // COMPANY
+const BaseUrl = 'http://192.168.203.232/wechat/'; // COMPANY
 // const BaseUrl = 'http://192.168.1.102/wechat/';// HOME 192.168.1.102
 
 module.exports = {
   //  URL
   AuthLoginByWeixin: BaseUrl + 'auth/login', //微信登录
-  ContentCategoryList: BaseUrl + 'content/category/queryList',  //分类目录全部分类数据接口
+  ContentCategoryList: BaseUrl + 'content/category/queryContentCategoryValidList',  //分类目录全部分类数据接口
   ContentList: BaseUrl + 'content/queryListByRand',  //内容数据接口
 
   ContentThumbUp: BaseUrl + 'content/addOrUpdateThumbUp',  //内容点赞接口

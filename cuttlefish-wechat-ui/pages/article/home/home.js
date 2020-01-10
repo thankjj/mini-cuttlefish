@@ -40,7 +40,6 @@ Component({
 
   attached: function () {
     var authorId = ''
-    var authorId = ''
     if (wx.getStorageSync("userInfo")) {
       app.globalData.userinfo = wx.getStorageSync("userInfo")
       authorId = wx.getStorageSync("userInfo").id
