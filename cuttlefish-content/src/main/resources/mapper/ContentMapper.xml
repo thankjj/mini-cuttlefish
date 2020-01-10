@@ -46,26 +46,26 @@
     <!-- =============================================== 内容浏览 =============================================== -->
     <!-- 内容浏览总数 -->
     <select id="getContentViewCount" parameterType="int" resultType="int">
-        select IFNULL(SUM(view_times), 0) viewCount from t_view_record where content_id = #{id}
+        select IFNULL(count(id), 0) viewCount from t_view_record where content_id = #{id}
     </select>
 
     <!-- 是否存在用户浏览记录 -->
-    <select id="isViewRecordExist" parameterType="map" resultType="int">
+    <!--<select id="isViewRecordExist" parameterType="map" resultType="int">
         select IFNULL(SUM(view_times), 0) from t_view_record
          where content_id = #{contentId}  and user_id = #{userId}
-    </select>
+    </select>-->
 
     <!-- 新增浏览记录 -->
     <insert id="addViewRecord" parameterType="map">
-        insert into t_view_record(user_id, content_id, view_times, create_time)
-            values (#{userId}, #{contentId}, 1, #{createTime})
+        insert into t_view_record(user_id, content_id, create_time, ip)
+            values (#{userId}, #{contentId}, #{createTime}, #{ip})
     </insert>
 
     <!-- 更改浏览数据 -->
-    <update id="updateViewRecord" parameterType="map">
+    <!--<update id="updateViewRecord" parameterType="map">
         update t_view_record set view_times = view_times + 1, update_time = #{updateTime}
             where content_id = #{contentId} and user_id = #{userId}
-    </update>
+    </update>-->
 
 
 

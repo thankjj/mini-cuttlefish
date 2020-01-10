@@ -4,7 +4,7 @@ import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import com.thank.cuttlefish.base.service.impl.MyServiceImpl;
 import com.thank.cuttlefish.base.utils.WebUtil;
-import com.thank.cuttlefish.common.constant.CuttlefishRedisKeyConstant;
+import com.thank.cuttlefish.common.constant.CuttlefishRedisConstant;
 import com.thank.cuttlefish.common.constant.WechatConstants;
 import com.thank.cuttlefish.pojo.User;
 import com.thank.cuttlefish.dto.UserDto;
@@ -12,7 +12,6 @@ import com.thank.cuttlefish.dto.WechatLoginParam;
 import com.thank.cuttlefish.user.config.WxMaConfiguration;
 import com.thank.cuttlefish.user.mapper.UserMapper;
 import com.thank.cuttlefish.user.service.UserService;
-import com.thank.cuttlefish.user.utils.JsonUtils;
 import com.thank.cuttlefish.user.utils.JwtHelper;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.BeanUtils;
@@ -46,7 +45,7 @@ public class UserServiceImpl extends MyServiceImpl<User> implements UserService 
         String wechatId = sessionInfo.getOpenid();
 
         // 从缓存获取用户信息
-        UserDto userDto = (UserDto) redisTemplate.opsForValue().get(CuttlefishRedisKeyConstant.REDIS_KEY_USER_PREFIX + wechatId);
+        UserDto userDto = (UserDto) redisTemplate.opsForValue().get(CuttlefishRedisConstant.REDIS_KEY_USER_PREFIX + wechatId);
 
         User user = new User();
         if (userDto == null){
@@ -69,19 +68,19 @@ public class UserServiceImpl extends MyServiceImpl<User> implements UserService 
             userDto.setViewCount(0);
             userDto.setThumbUpCount(0);
             // token加入缓存
-            redisTemplate.opsForValue().set(CuttlefishRedisKeyConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, token);
-            redisTemplate.expire(CuttlefishRedisKeyConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, 30, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(CuttlefishRedisConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, token);
+            redisTemplate.expire(CuttlefishRedisConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, CuttlefishRedisConstant.REDIS_KEY_TOKEN_TIMEOUT, TimeUnit.SECONDS);
         }else{
             BeanUtils.copyProperties(userDto, user);
             // 用户非首次登录，需校验token是否过期
-            Long tokenValidTime = redisTemplate.getExpire(CuttlefishRedisKeyConstant.REDIS_KEY_TOKEN_PREFIX + wechatId);
+            Long tokenValidTime = redisTemplate.getExpire(CuttlefishRedisConstant.REDIS_KEY_TOKEN_PREFIX + wechatId);
             if (tokenValidTime < 0){
                 // 过期需要重新生成token
                 String token = JwtHelper.createJWT("wechat", wechatId, WechatConstants.JWT_TTL);
                 user.setToken(token);
                 // token加入缓存
-                redisTemplate.opsForValue().getAndSet(CuttlefishRedisKeyConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, token);
-                redisTemplate.expire(CuttlefishRedisKeyConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, 30, TimeUnit.SECONDS);
+                redisTemplate.opsForValue().getAndSet(CuttlefishRedisConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, token);
+                redisTemplate.expire(CuttlefishRedisConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, CuttlefishRedisConstant.REDIS_KEY_TOKEN_TIMEOUT, TimeUnit.SECONDS);
             }
             // 更新用户信息
             user.setUpdateTime(new Date());
@@ -90,7 +89,7 @@ public class UserServiceImpl extends MyServiceImpl<User> implements UserService 
             BeanUtils.copyProperties(user, userDto);
         }
         // 更新用户缓存
-        redisTemplate.opsForValue().getAndSet(CuttlefishRedisKeyConstant.REDIS_KEY_USER_PREFIX + wechatId, userDto);
+        redisTemplate.opsForValue().getAndSet(CuttlefishRedisConstant.REDIS_KEY_USER_PREFIX + wechatId, userDto);
 
         return userDto;
     }

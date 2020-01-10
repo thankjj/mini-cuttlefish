@@ -12,11 +12,11 @@ public interface ContentMapper extends MyMapper<Content> {
 
     // ========================= 内容浏览 ===============================
     // 是否存在用户浏览记录
-    Integer isViewRecordExist(Map<String, Object> map);
+//    Integer isViewRecordExist(Map<String, Object> map);
     // 新增浏览记录
     Integer addViewRecord(Map<String, Object> map);
     // 更改浏览数据
-    Integer updateViewRecord(Map<String, Object> map);
+//    Integer updateViewRecord(Map<String, Object> map);
     // 获取文章总浏览数
     Integer getContentViewCount(Integer id);
 
