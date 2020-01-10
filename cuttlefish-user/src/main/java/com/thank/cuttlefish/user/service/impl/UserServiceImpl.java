@@ -52,7 +52,7 @@ public class UserServiceImpl extends MyServiceImpl<User> implements UserService 
         if (userDto == null){
             WechatLoginParam.UserInfoX.UserInfo userInfo = loginAuthParamVO.getUserInfo().getUserInfo();
             // 用户首次登录
-            String token = JwtHelper.createJWT("wechat", JsonUtils.toJson(user), WechatConstants.JWT_TTL);
+            String token = JwtHelper.createJWT("wechat", wechatId, WechatConstants.JWT_TTL);
             user.setToken(token);
             user.setNickname(userInfo.getNickName());
             user.setPassword("");
@@ -77,7 +77,7 @@ public class UserServiceImpl extends MyServiceImpl<User> implements UserService 
             Long tokenValidTime = redisTemplate.getExpire(CuttlefishRedisKeyConstant.REDIS_KEY_TOKEN_PREFIX + wechatId);
             if (tokenValidTime < 0){
                 // 过期需要重新生成token
-                String token = JwtHelper.createJWT("wechat", JsonUtils.toJson(user), WechatConstants.JWT_TTL);
+                String token = JwtHelper.createJWT("wechat", wechatId, WechatConstants.JWT_TTL);
                 user.setToken(token);
                 // token加入缓存
                 redisTemplate.opsForValue().getAndSet(CuttlefishRedisKeyConstant.REDIS_KEY_TOKEN_PREFIX + wechatId, token);

@@ -3,7 +3,6 @@ package com.thank.cuttlefish.wechat.controller;
 import com.thank.cuttlefish.common.utils.Result;
 import com.thank.cuttlefish.dto.ContentDto;
 import com.thank.cuttlefish.wechat.service.WechatContentService;
-import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ public class WechatContentController {
     private WechatContentService wechatContentService;
 
     @GetMapping("/queryListByRand")
-    public Result<List<ContentDto>> queryListByRand(ContentDto contentDto) throws WxErrorException {
+    public Result<List<ContentDto>> queryListByRand(ContentDto contentDto) {
         return Result.success(wechatContentService.queryListByRand(contentDto));
     }
 
