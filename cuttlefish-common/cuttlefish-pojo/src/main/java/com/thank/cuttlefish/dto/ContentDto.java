@@ -24,6 +24,8 @@ public class ContentDto {
   private Date updateTime;
   private String contentCoverUrl;
 
+  private Integer operateId;
+
   private String categoryName; // 分类名称
   private String nickname; // 用户名称
   private String avatarImgUrl; // 用户头像地址

@@ -87,6 +87,23 @@ public class UserServiceImpl extends MyServiceImpl<User> implements UserService 
             user.setIpAddress(WebUtil.getInstance().getIpAddress());
             userMapper.updateById(user);
             BeanUtils.copyProperties(user, userDto);
+
+            // 用户内容被浏览数、内容被点赞数从缓存获取
+            String userContentViewCountKey = CuttlefishRedisConstant.REDIS_KEY_USER_CONTENT_VIEW_COUNT_PREFIX + user.getId();
+            if (!redisTemplate.hasKey(userContentViewCountKey)){
+                userDto.setViewCount(0);
+            }else {
+                userDto.setViewCount(Integer.parseInt(redisTemplate.opsForValue().get(userContentViewCountKey).toString()));
+            }
+            String userContentThumbupCountKey = CuttlefishRedisConstant.REDIS_KEY_USER_CONTENT_THUMBUP_COUNT_PREFIX + user.getId();
+            if (!redisTemplate.hasKey(userContentThumbupCountKey)){
+                userDto.setThumbUpCount(0);
+            }else {
+                userDto.setThumbUpCount(Integer.parseInt(redisTemplate.opsForValue().get(userContentThumbupCountKey).toString()));
+            }
+
+
+
         }
         // 更新用户缓存
         redisTemplate.opsForValue().getAndSet(CuttlefishRedisConstant.REDIS_KEY_USER_PREFIX + wechatId, userDto);

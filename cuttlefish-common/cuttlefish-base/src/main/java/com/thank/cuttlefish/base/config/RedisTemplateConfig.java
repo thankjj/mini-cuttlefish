@@ -7,14 +7,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-@Configuration
+//@Configuration
 public class RedisTemplateConfig {
     /**
      * 设置 redisTemplate 的序列化设置
-     * @param redisConnectionFactory
      * @return
      */
-    @Bean
+//    @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         // 1.创建 redisTemplate 模版
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
@@ -29,6 +28,7 @@ public class RedisTemplateConfig {
         template.afterPropertiesSet();
         return template;
     }
+
 
 
 }

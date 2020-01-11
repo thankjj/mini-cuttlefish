@@ -37,8 +37,8 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
         String currentIP = WebUtil.getInstance().getIpAddress(); // 当前IP
         String contentViewCountKey = CuttlefishRedisConstant.REDIS_KEY_CONTENT_VIEW_COUNT_PREFIX + contentDto.getId(); // 当前文章浏览总数key
 
-        // 约定时间内同一用户，同一IP再次浏览
-        String contentViewRecordKey = CuttlefishRedisConstant.REDIS_KEY_CONTENT_VIEW_RECORD_PREFIX + contentDto.getAuthorId() +  "_" + currentIP;
+        // 约定时间内同一用户，同一IP再次浏览无效
+        String contentViewRecordKey = CuttlefishRedisConstant.REDIS_KEY_CONTENT_VIEW_RECORD_PREFIX + contentDto.getOperateId() +  "_" + currentIP;
         String contentViewRecordValue = contentDto.getId() + "";
         if (!redisTemplate.hasKey(contentViewRecordKey)){
             redisTemplate.opsForValue().set(contentViewRecordKey, contentViewRecordValue);
@@ -47,11 +47,19 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
             return Integer.parseInt(redisTemplate.opsForValue().get(contentViewCountKey).toString());
         }
 
+        // 用户内容被浏览总次数 缓存加1
+        String userContentViewCountKey = CuttlefishRedisConstant.REDIS_KEY_USER_CONTENT_VIEW_COUNT_PREFIX + contentDto.getAuthorId();
+        if (!redisTemplate.hasKey(userContentViewCountKey)){
+            redisTemplate.opsForValue().set(userContentViewCountKey, 1);
+        }else {
+            redisTemplate.opsForValue().increment(userContentViewCountKey);
+        }
+
         Date now = new Date();
         Map<String, Object> map = new HashMap<String, Object>();
         // 新增浏览记录
         map.put("ip", currentIP);
-        map.put("userId", contentDto.getAuthorId());
+        map.put("userId", contentDto.getOperateId());
         map.put("contentId", contentDto.getId());
         map.put("createTime", now);
         contentMapper.addViewRecord(map);
@@ -74,7 +82,7 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
         String cacheKeyPrefix = thumbStatus == 0 ? CuttlefishRedisConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishRedisConstant.REDIS_KEY_USER_THUMBUP_PREFIX;
         String cacheCurrentKey = cacheKeyPrefix + contentDto.getId();
         String cacheOppositeKey = (thumbStatus == 1 ? CuttlefishRedisConstant.REDIS_KEY_USER_THUMBUP_CANCEL_PREFIX : CuttlefishRedisConstant.REDIS_KEY_USER_THUMBUP_PREFIX) + contentDto.getId();
-        String cacheValue = String.valueOf(contentDto.getAuthorId());
+        String cacheValue = String.valueOf(contentDto.getOperateId());
         // 判断当前缓存中是否有此记录
         if (!redisTemplate.opsForSet().isMember(cacheCurrentKey, cacheValue)){
             redisTemplate.opsForSet().add(cacheCurrentKey, cacheValue);
@@ -83,6 +91,23 @@ public class ContentServiceImpl extends MyServiceImpl<Content> implements Conten
         if (redisTemplate.opsForSet().isMember(cacheOppositeKey, cacheValue)){
             redisTemplate.delete(cacheOppositeKey);
         }
+
+        // 用户文章被点赞总次数 缓存加1/减1
+        String userContentThumbupCountKey = CuttlefishRedisConstant.REDIS_KEY_USER_CONTENT_THUMBUP_COUNT_PREFIX + contentDto.getAuthorId();
+        if (!redisTemplate.hasKey(userContentThumbupCountKey)){
+            redisTemplate.opsForValue().set(userContentThumbupCountKey, 1);
+        }else {
+            if(thumbStatus == 0){
+                // 取消点赞
+                redisTemplate.opsForValue().decrement(userContentThumbupCountKey);
+            }else {
+                // 点赞
+                redisTemplate.opsForValue().increment(userContentThumbupCountKey);
+            }
+
+        }
+
+
         return thumbStatus;
     }
 
