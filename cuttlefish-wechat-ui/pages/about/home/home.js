@@ -9,10 +9,6 @@ Component({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    starCount: 0,
-    forksCount: 0,
-    visitTotal: 0,
-
     
     userInfo: {},
     hasUserInfo: false,
@@ -45,10 +41,12 @@ Component({
             //   url: backUrl + '?' + backParams,
             // })
             console.log(res.data.nickname)
-            app.globalData.userInfo = res.data.userInfo
+            app.globalData.userInfo = res.data
             this.setData({
               userInfo: res.data,
-              hasUserInfo: true
+              hasUserInfo: true,
+              // thumbupCount: app.globalData.userInfo.thumbupCount,
+              // viewCount: app.globalData.userInfo.viewCount
             })
           }
         })

@@ -1,5 +1,5 @@
-// const BaseUrl = 'http://192.168.1.105:80/wechat/'; // GB
-const BaseUrl = 'http://192.168.203.232/wechat/'; // COMPANY
+const BaseUrl = 'http://192.168.1.105:80/wechat/'; // GB
+// const BaseUrl = 'http://192.168.203.232/wechat/'; // COMPANY
 // const BaseUrl = 'http://192.168.1.102/wechat/';// HOME 192.168.1.102
 
 module.exports = {

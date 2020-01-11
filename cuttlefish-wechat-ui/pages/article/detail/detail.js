@@ -53,7 +53,7 @@ Page({
     if (app.globalData.userInfo) {
       // console.log("点赞........." + contentId + app.globalData.userInfo.id)
       util.request(api.ContentThumbUp,
-        { id: currentContent.id, authorId: app.globalData.userInfo.id, thumbUpStatus: currentContent.thumbUpStatus == 0 ? 1 : 0 },
+        { id: currentContent.id, authorId: currentContent.authorId, operateId: app.globalData.userInfo.id, thumbUpStatus: currentContent.thumbUpStatus == 0 ? 1 : 0 },
         'GET').then(res => {
           if (res.code == 200) {
             console.log("点赞次数加一/减一：" + res.data)
@@ -89,12 +89,12 @@ Page({
 
   addOrUpdateViewRecord: function () {
     // console.log("浏览........." + currentContent.id)
-    var authorId = ""
+    var operateId = ""
     if (app.globalData.userInfo) {
-      authorId =  app.globalData.userInfo.id
+      operateId =  app.globalData.userInfo.id
     }
     util.request(api.ContentView,
-      { id: currentContent.id, authorId: authorId},
+      { id: currentContent.id, authorId: currentContent.authorId, operateId: operateId },
       'GET').then(res => {
         if (res.code == 200) {
           console.log("浏览次数加一：" + res.data)
